@@ -1,90 +1,80 @@
 # ✂️ Barbexa - Barbería Online
 
-Barbexa es una aplicación web moderna para la gestión de barberías.  
+**Barbexa** es una aplicación web moderna para la gestión de barberías.  
 Permite a los clientes **registrarse, iniciar sesión y reservar servicios**, y a los administradores **gestionar usuarios, servicios y citas** de forma sencilla.  
 
-El proyecto está dividido en **Frontend** (Vite + JS) y **Backend** (Node.js + Express + PostgreSQL/MySQL), con un diseño responsive y validaciones completas.
-
----
-
-## 📸 Vista Previa
-
-![Barbexa Logo](./frontend/assets/img/logo.png)
-
-*(Agrega aquí capturas de pantalla de las vistas principales: login, register, home, etc.)*
+El proyecto está dividido en **Frontend** (Vite + JavaScript) y **Backend** (Node.js + Express + PostgreSQL/MySQL), con un diseño **responsive**, validaciones completas y autenticación segura.
 
 ---
 
 ## 🚀 Características
 
-- 🔐 **Autenticación de usuarios** con login y registro seguro.  
-- 🧾 **Gestión de clientes y servicios**.  
-- 📅 **Reservas y control de citas**.  
-- 🎨 **Frontend responsive y moderno** con Vite.  
-- ⚡ **Backend con Node.js + Express**.  
+- 🔐 **Autenticación de usuarios** con login y registro seguro (JWT + Bcrypt).  
+- 👤 **Gestión de clientes y administradores**.  
+- 💈 **Control de servicios y precios**.  
+- 📅 **Reservas y control de citas** en tiempo real.  
+- 🎨 **Frontend responsive y moderno** (Vite + CSS3).  
+- ⚡ **Backend escalable** con Express.  
 - 🗄️ **Base de datos relacional** (PostgreSQL / MySQL).  
-- ✅ **Validaciones avanzadas en formularios**.  
-- 📂 **Arquitectura organizada** con separación de capas.
+- ✅ **Validaciones avanzadas en formularios** en frontend y backend.  
+- 📂 **Arquitectura organizada** con separación de capas.  
+- 🌐 **Diseño accesible y SEO-friendly**.  
 
 ---
 
 ## 🛠️ Tecnologías
 
 ### **Frontend**
-- Vite
-- HTML5 + CSS3
-- JavaScript (ES Modules)
-- Router personalizado
-- Validaciones de formularios
+- [Vite](https://vitejs.dev/)  
+- HTML5 + CSS3  
+- JavaScript (ES Modules)  
+- Router personalizado  
+- Validaciones de formularios  
 
 ### **Backend**
-- Node.js
-- Express
-- JWT (autenticación)
-- Bcrypt (encriptación de contraseñas)
-- PostgreSQL / MySQL
+- [Node.js](https://nodejs.org/)  
+- [Express](https://expressjs.com/)  
+- JWT (autenticación)  
+- Bcrypt (encriptación de contraseñas)  
+- PostgreSQL / MySQL  
+- Dotenv para variables de entorno  
 
 ---
 
 ## 📂 Estructura del Proyecto
 
+```bash
 barbexa/
-│── backend/ # Servidor Node.js + Express
-│ ├── src/
-│ │ ├── index.js # Punto de entrada del servidor
-│ │ ├── routes/ # Rutas API (auth, users, etc.)
-│ │ ├── controllers/ # Lógica de negocio
-│ │ ├── models/ # Modelos DB
-│ │ └── middlewares/ # Middlewares (auth, validaciones)
-│ └── package.json
+│── backend/                # Servidor Node.js + Express
+│   ├── src/
+│   │   ├── index.js        # Punto de entrada del servidor
+│   │   ├── routes/         # Definición de rutas API (auth, users, services, bookings)
+│   │   ├── controllers/    # Lógica de negocio
+│   │   ├── models/         # Modelos de base de datos
+│   │   └── middlewares/    # Middlewares (auth, validaciones)
+│   └── package.json
 │
-│── frontend/ # Aplicación cliente (Vite)
-│ ├── index.html
-│ ├── home.html
-│ ├── login.html
-│ ├── register.html
-│ ├── style/ # Estilos CSS
-│ ├── js/ # Lógica JS
-│ │ ├── router.js
-│ │ ├── login.js
-│ │ ├── register.js
-│ │ ├── home.js
-│ │ └── utils.js
-│ └── assets/ # Imágenes, logos, etc.
+│── frontend/               # Aplicación cliente (Vite)
+│   ├── index.html
+│   ├── home.html
+│   ├── login.html
+│   ├── register.html
+│   ├── assets/             # Imágenes, logos, íconos
+│   ├── style/              # Estilos CSS
+│   └── js/                 # Lógica JS
+│       ├── router.js
+│       ├── login.js
+│       ├── register.js
+│       ├── home.js
+│       └── utils.js
 │
 └── README.md
-
-yaml
+⚙️ Instalación y Uso
+1️⃣ Clonar el repositorio
+bash
 Copiar código
-
----
-
-## ⚙️ Instalación y Uso
-
-### 1️⃣ Clonar el repositorio
-```bash
-git clone https://github.com/Coder-milo/barbexa.git
-cd barbexa
+git clone https://github.com/Coder-milo/Barbexa-barberia.git
+cd Barbexa-barberia
 2️⃣ Configurar el Backend
 bash
 Copiar código
@@ -111,40 +101,53 @@ Copiar código
 cd frontend
 npm install
 npm run dev
-El frontend correrá en http://localhost:5173
-El backend en http://localhost:3000
+El frontend se ejecutará en: http://localhost:5173
 
-🧪 Endpoints Principales
+El backend en: http://localhost:3000
+
+📡 Endpoints Principales
 Auth
 POST /api/v1/auth/register → Registro de usuario
 
 POST /api/v1/auth/login → Inicio de sesión
 
 Usuarios
-GET /api/v1/users → Listar usuarios (admin)
+GET /api/v1/users → Listar usuarios (solo admin)
 
 GET /api/v1/users/:id → Obtener usuario por ID
 
 Servicios
 GET /api/v1/services → Listar servicios
 
-POST /api/v1/services → Crear servicio (admin)
+POST /api/v1/services → Crear servicio (solo admin)
 
 Reservas
 GET /api/v1/bookings → Listar reservas
 
 POST /api/v1/bookings → Crear reserva
 
+🧪 Tests
+En desarrollo. Se recomienda usar Jest para pruebas unitarias en backend y Vitest en frontend.
+
 👨‍💻 Contribución
 Haz un fork del repositorio.
 
-Crea una nueva rama: git checkout -b feature/nueva-funcionalidad.
+Crea una nueva rama:
 
-Realiza los cambios y haz commit: git commit -m "Agregada nueva funcionalidad".
+bash
+Copiar código
+git checkout -b feature/nueva-funcionalidad
+Realiza tus cambios y haz commit:
 
-Sube tu rama: git push origin feature/nueva-funcionalidad.
+bash
+Copiar código
+git commit -m "Agregada nueva funcionalidad"
+Sube tu rama:
 
-Crea un Pull Request.
+bash
+Copiar código
+git push origin feature/nueva-funcionalidad
+Abre un Pull Request 🚀
 
 📜 Licencia
 Este proyecto está bajo la licencia MIT.
@@ -152,17 +155,15 @@ Puedes usarlo libremente con fines educativos y de desarrollo.
 
 💡 Créditos
 Desarrollado con ❤️ por:
+
 Dalexa Sanjuan
+
 José Camilo Doria
+
 Sergio Bonilla
-Sebastian Pineda
-Juseth 
+
+Sebastián Pineda
+
+Juseth
 
 
-
-
-
-
-
-
-Preguntar a ChatGPT
