@@ -151,15 +151,13 @@ Este proyecto está bajo la licencia MIT.
 Puedes usarlo libremente con fines educativos y de desarrollo.
 
 💡 Créditos
-Desarrollado con ❤️ por José Camilo Doria (@Coder-milo)
+Desarrollado con ❤️ por:
+Dalexa Sanjuan
+José Camilo Doria
+Sergio Bonilla
+Sebastian Pineda
+Juseth 
 
-yaml
-Copiar código
-
----
-
-👉 José, este es un README **completo y profesional**.  
-¿Quieres que lo deje más **formal** (tipo empresarial) o más **atractivo con emojis, badges y screenshots** estilo startup? 🚀
 
 
 
