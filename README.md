@@ -1,169 +1,179 @@
-# ✂️ Barbexa - Barbería Online
+# Barbexa - Backend API Documentation
 
-**Barbexa** es una aplicación web moderna para la gestión de barberías.  
-Permite a los clientes **registrarse, iniciar sesión y reservar servicios**, y a los administradores **gestionar usuarios, servicios y citas** de forma sencilla.  
-
-El proyecto está dividido en **Frontend** (Vite + JavaScript) y **Backend** (Node.js + Express + PostgreSQL/MySQL), con un diseño **responsive**, validaciones completas y autenticación segura.
-
----
-
-## 🚀 Características
-
-- 🔐 **Autenticación de usuarios** con login y registro seguro (JWT + Bcrypt).  
-- 👤 **Gestión de clientes y administradores**.  
-- 💈 **Control de servicios y precios**.  
-- 📅 **Reservas y control de citas** en tiempo real.  
-- 🎨 **Frontend responsive y moderno** (Vite + CSS3).  
-- ⚡ **Backend escalable** con Express.  
-- 🗄️ **Base de datos relacional** (PostgreSQL / MySQL).  
-- ✅ **Validaciones avanzadas en formularios** en frontend y backend.  
-- 📂 **Arquitectura organizada** con separación de capas.  
-- 🌐 **Diseño accesible y SEO-friendly**.  
+## 📌 Project Overview
+*Barbexa* is a *Node.js/Express backend API* for a barbershop management system.  
+It provides endpoints for *services, reservations, combos, user management, and authentication*.  
+The system integrates *role-based access control, **JWT authentication, and **MySQL database management*.
 
 ---
 
-## 🛠️ Tecnologías
+## 📂 Directory Structure
 
-### **Frontend**
-- [Vite](https://vitejs.dev/)  
-- HTML5 + CSS3  
-- JavaScript (ES Modules)  
-- Router personalizado  
-- Validaciones de formularios  
 
-### **Backend**
-- [Node.js](https://nodejs.org/)  
-- [Express](https://expressjs.com/)  
-- JWT (autenticación)  
-- Bcrypt (encriptación de contraseñas)  
-- PostgreSQL / MySQL  
-- Dotenv para variables de entorno  
+server/
+├── src/
+│   ├── config/        # Configuration files and DB setup
+│   ├── controllers/   # Route handlers
+│   ├── middlewares/   # Express middleware
+│   ├── repositories/  # Database access layer
+│   ├── routes/        # API route definitions
+│   ├── services/      # Business logic layer
+│   ├── shared/        # Utilities and helpers
+│   └── doc/           # Documentation
+├── .env               # Environment variables
+├── app.js             # Express app setup
+└── index.js           # Entry point
+
+`
 
 ---
 
-## 📂 Estructura del Proyecto
+## ✨ Key Features
+- 🔑 *JWT Authentication* with HTTP-only cookies  
+- 🛡️ *Role-based access control* (Admin, Barber, Client)  
+- 💈 *Service and combo management*  
+- 📅 *Reservation system* with availability checking  
+- 🗄️ *MySQL database* with connection pooling  
+- ✅ Input validation and error handling  
+- 🌐 *CORS configuration* for frontend integration  
 
-```bash
-barbexa/
-│── backend/                # Servidor Node.js + Express
-│   ├── src/
-│   │   ├── index.js        # Punto de entrada del servidor
-│   │   ├── routes/         # Definición de rutas API (auth, users, services, bookings)
-│   │   ├── controllers/    # Lógica de negocio
-│   │   ├── models/         # Modelos de base de datos
-│   │   └── middlewares/    # Middlewares (auth, validaciones)
-│   └── package.json
-│
-│── frontend/               # Aplicación cliente (Vite)
-│   ├── index.html
-│   ├── home.html
-│   ├── login.html
-│   ├── register.html
-│   ├── assets/             # Imágenes, logos, íconos
-│   ├── style/              # Estilos CSS
-│   └── js/                 # Lógica JS
-│       ├── router.js
-│       ├── login.js
-│       ├── register.js
-│       ├── home.js
-│       └── utils.js
-│
-└── README.md
-⚙️ Instalación y Uso
-1️⃣ Clonar el repositorio
+---
+
+## 📌 API Endpoints
+
+### 🔑 Authentication
+- POST /login → User login  
+- POST /register → User registration  
+- GET /profile → Get authenticated user profile  
+- POST /logout → Logout user  
+
+### 👤 Users
+- GET /usersCount → Get total users count  
+- GET /barberUser → Get all barbers  
+- GET /users → Get all users  
+
+### 💈 Services
+- POST /services → Create service (*Admin only*)  
+- GET /services → Get all active services  
+- PUT /services/:id → Update service (*Admin only*)  
+- DELETE /services/:id → Delete service (*Admin only*)  
+- POST /barbers/:barberId/services → Assign services to a barber (*Admin only*)  
+
+### 📅 Reservations
+- POST /reservations → Create new reservation  
+- GET /reservations/detail/:id → Get reservation details  
+- GET /reservations/list → List reservations with filters  
+- PATCH /reservations/:id/status → Update reservation status  
+- GET /reservations/barber/:barberId/availability → Get barber availability  
+
+### 🎁 Combos
+- POST /combos → Create combo (*Admin only*)  
+- GET /combos → Get all active combos  
+- PUT /combos/:id → Update combo (*Admin only*)  
+- DELETE /combos/:id → Delete combo (*Admin only*)  
+- POST /combos/:id/services → Assign services to combo (*Admin only*)  
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1. Clone repository
 bash
-Copiar código
-git clone https://github.com/Coder-milo/Barbexa-barberia.git
-cd Barbexa-barberia
-2️⃣ Configurar el Backend
+git clone <repo_url>
+cd server
+`
+
+### 2. Install dependencies
+
 bash
-Copiar código
-cd backend
 npm install
-Crear un archivo .env en backend/ con las siguientes variables:
+
+
+### 3. Configure environment variables (.env)
 
 env
-Copiar código
 PORT=3000
 DB_HOST=localhost
-DB_USER=usuario
-DB_PASSWORD=contraseña
-DB_NAME=barbexa_db
-JWT_SECRET=supersecreto
-Ejecutar el servidor:
+DB_USER=user
+DB_PASSWORD=password 
+DB_NAME=barbexa
+DB_PORT=3306
+JWT_SECRET=secret
+JWT_EXPIRES=1h
+
+
+### 4. Initialize database
 
 bash
-Copiar código
+mysql -u root -p < src/doc/script.sql
+
+
+### 5. Run the server
+
+* Development (hot reload):
+
+bash
 npm run dev
-3️⃣ Configurar el Frontend
-bash
-Copiar código
-cd frontend
-npm install
-npm run dev
-El frontend se ejecutará en: http://localhost:5173
 
-El backend en: http://localhost:3000
 
-📡 Endpoints Principales
-Auth
-POST /api/v1/auth/register → Registro de usuario
-
-POST /api/v1/auth/login → Inicio de sesión
-
-Usuarios
-GET /api/v1/users → Listar usuarios (solo admin)
-
-GET /api/v1/users/:id → Obtener usuario por ID
-
-Servicios
-GET /api/v1/services → Listar servicios
-
-POST /api/v1/services → Crear servicio (solo admin)
-
-Reservas
-GET /api/v1/bookings → Listar reservas
-
-POST /api/v1/bookings → Crear reserva
-
-🧪 Tests
-En desarrollo. Se recomienda usar Jest para pruebas unitarias en backend y Vitest en frontend.
-
-👨‍💻 Contribución
-Haz un fork del repositorio.
-
-Crea una nueva rama:
+* Production:
 
 bash
-Copiar código
-git checkout -b feature/nueva-funcionalidad
-Realiza tus cambios y haz commit:
-
-bash
-Copiar código
-git commit -m "Agregada nueva funcionalidad"
-Sube tu rama:
-
-bash
-Copiar código
-git push origin feature/nueva-funcionalidad
-Abre un Pull Request 🚀
-
-📜 Licencia
-Este proyecto está bajo la licencia MIT.
-Puedes usarlo libremente con fines educativos y de desarrollo.
-
-💡 Créditos
-Desarrollado con ❤️ por:
-
-Dalexa Sanjuan
-
-José Camilo Doria
-
-Sergio Bonilla
-
-Sebastián Pineda
-
-Juseth
+npm start
 
 
+---
+
+## 🗄️ Database Schema
+
+The database includes the following tables:
+
+* *Users & Roles*
+* *Services*
+* *Reservations*
+* *Service Combos*
+* *Barber Availability*
+* Relationship tables
+
+➡️ See src/doc/script.sql for full schema.
+
+---
+
+## 🔒 Security
+
+* Password hashing with *bcrypt*
+* JWT stored in *HTTP-only cookies*
+* Role-based access control
+* Input validation
+* CORS configuration
+* Global error handling
+
+---
+
+## 🛠️ Development Stack
+
+* [Node.js](https://nodejs.org/) & [Express](https://expressjs.com/)
+* [MySQL](https://www.mysql.com/) with mysql2/promise
+* [JWT](https://jwt.io/) for authentication
+* [bcrypt](https://github.com/kelektiv/node.bcrypt.js) for password hashing
+* [dayjs](https://day.js.org/) for date/time handling
+* [dotenv](https://github.com/motdotla/dotenv) for configuration
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push to branch
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+Licensed under the *ISC License*.
+See [LICENSE](./LICENSE) for details.
+
+```
